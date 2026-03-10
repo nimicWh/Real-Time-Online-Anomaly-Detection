@@ -1,0 +1,7 @@
+@software{River2023,
+  author = {Lemaitre, Guillaume and Valera, Isabel and Féraud, Romain},
+  title = {River: Online Machine Learning in Python},
+  year = {2023},
+  url = {https://riverml.xyz/},
+  version = {0.15.0}
+}
