@@ -1,5 +1,11 @@
 # ==========================================
 # Real-Time Online Anomaly Detection with Auto Node Discovery
+#### Acknowledgement
+
+#This project uses [River](https://riverml.xyz/) for online machine learning and streaming anomaly detection.  
+#River is an open-source Python library developed by Guillaume Lemaitre, Isabel Valera, and Romain Féraud.
+
+
 # ==========================================
 
 import time
