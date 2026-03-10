@@ -2,8 +2,6 @@
 
 This project implements a **real-time streaming anomaly detection pipeline** using **River’s online learning library**. It performs **predictive maintenance** by monitoring sensor data, computing online features, and detecting anomalies on-the-fly.
 
-This project uses for online machine learning (Lemaitre et al., 2023).
-
 Reads sensor values in real-time via OPC UA
 
 Computes online features and anomaly score
@@ -34,6 +32,9 @@ Updates the model incrementally
   - Logs anomalies and scores to CSV
   - Saves the online model to disk for warm-starting in future sessions
 
+## Acknowledgements
 
+This project uses [River](https://riverml.xyz/) for online machine learning and streaming anomaly detection.  
+River is an open-source Python library developed by Guillaume Lemaitre, Isabel Valera, and Romain Féraud.
 ---
 
