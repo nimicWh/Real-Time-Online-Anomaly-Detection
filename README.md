@@ -24,8 +24,8 @@ Updates the model incrementally
   - All features computed incrementally for real-time processing
 
 - **Online anomaly detection**
-  - Continuously updates the model with new data (`learn_one`)
-  - Computes anomaly scores (`score_one`) in real-time
+  - Continuously updates the model with new data
+  - Computes anomaly scores in real-time
 
 - **Logging and persistence**
   - Logs anomalies and scores to CSV
