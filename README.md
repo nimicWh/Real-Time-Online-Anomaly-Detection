@@ -29,4 +29,3 @@ This project uses for online machine learning (Lemaitre et al., 2023).
 
 ---
 
-## Project Structure
