@@ -13,7 +13,7 @@ import os
 import pandas as pd
 from opcua import Client, ua
 import joblib
-from river import anomaly, preprocessing, stats
+from river import anomaly
 
 # ==========================================
 # 1) Configuration
@@ -22,8 +22,6 @@ from river import anomaly, preprocessing, stats
 PLC_OPCUA_URL = "opc.tcp://192.168.0.100:4840"  
 POLL_INTERVAL = 1.0  # seconds between readings
 LOG_FILE = os.path.join("logs", "anomaly_log.csv")
-HISTORICAL_DATA_PATH = os.path.join("data", "historical_sensor_data.csv")
-RIVER_MODEL_PATH = os.path.join("models", "river_model.pkl")
 THRESHOLD = 0.6  # anomaly score threshold
 
 # ==========================================
@@ -59,45 +57,11 @@ for name, nodeid in PLC_NODES.items():
 # 3) Initialize River online pipeline
 # ==========================================
 
-# Online preprocessing
-imputers = {feature: preprocessing.Imputer() for feature in PLC_NODES.keys()}
-scalers = {feature: preprocessing.StandardScaler() for feature in PLC_NODES.keys()}  # optional
-
-# Online feature engineering: rolling mean, std, delta
-rolling_mean = {feature: stats.Mean() 'for feature in PLC_NODES.keys()}
-rolling_std = {feature: stats.Var() for feature in PLC_NODES.keys()}
-last_value = {feature: None for feature in PLC_NODES.keys()}
-
 # Online anomaly detection
 model = anomaly.not(seed=42, n_trees=25, height=10)
 
-# ==========================================
-# 4) Warm-start with historical data
-# ==========================================
 
-if os.path.isfile(HISTORICAL_DATA_PATH):
-    df_hist = pd.read_csv(HISTORICAL_DATA_PATH)
-    for _, row in df_hist.iterrows():
-        x = row.drop("anomaly_flag", errors='ignore').to_dict()
-        for feature in PLC_NODES.keys():
-            if feature in x:
-                x[feature] = imputers[feature].learn_one({feature: x[feature]})[feature]
-                x[feature] = scalers[feature].learn_one({feature: x[feature]})[feature]
-        # Feature engineering
-        for feature in PLC_NODES.keys():
-            if feature in x:
-                x[f"{feature}'_mean"] = rolling_mean[feature].update(x[feature]).mean
-                x[f"{feature}_std"] = rolling_std[feature].update(x[feature]).std
-                if last_value[feature] is None:
-                    x[f"{feature}_delta"] = 0.0
-                else:
-                    x[f"{feature}_delta"] = x[feature] - last_value[feature]
-                last_value[feture] = x[feature]
-        model.learn_one(x)
-    print(f"Model warm-started with historical data ({len(df_hist)} samples)")
-else:
-    print("No historical data found. Model starts fresh.")
-
+  
 # ==========================================
 # 5) Real-time streaming loop
 # ==========================================
