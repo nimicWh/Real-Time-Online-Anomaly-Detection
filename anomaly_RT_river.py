@@ -80,21 +80,8 @@ try:
 
         x = dict(sensor_data)
 
-        # Online preprocessing
-        for feature in PLC_NODES.keys():
-            x[feature] = imputers[feature].learn_one({feature: x[feature]})[feature]
-            x[feature] = scalers[feature].learn_one({feature: x[feature]})[feature]
-
-        # Online feature engineering
-        for feature in PLC_NODES.keys():
-            x[f"{feature}_mean"] = rolling_mean[feature].update(x[feature]).mean
-            x[f"{feature}_std"] = rolling_std[feature].update(x[feature]).std
-            if last_value[feature] is None:
-                x[f"{feature}_delta"] = 0.0
-            else:
-                x[f"{feature}_delta"] = x[feature] - last_value[feature]
-            last_value[feature] = x[feature]
-            model.fit()
+        
+     
         # Streaming inference
         score = model.score_one(x)
         anomaly_flag = -1 if score > THRESHOLD else 1
