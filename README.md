@@ -31,10 +31,10 @@ Updates the model incrementally
 - **Logging and persistence**
   - Logs anomalies and scores to CSV
   - Saves the online model to disk for warm-starting in future sessions
-
-## Acknowledgements
+---
+### Acknowledgement
 
 This project uses [River](https://riverml.xyz/) for online machine learning and streaming anomaly detection.  
 River is an open-source Python library developed by Guillaume Lemaitre, Isabel Valera, and Romain Féraud.
----
+
 
