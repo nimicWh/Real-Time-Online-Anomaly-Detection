@@ -24,7 +24,6 @@ Updates the model incrementally
   - All features computed incrementally for real-time processing
 
 - **Online anomaly detection**
-  - Uses River’s `HalfSpaceTrees` (online Isolation Forest)
   - Continuously updates the model with new data (`learn_one`)
   - Computes anomaly scores (`score_one`) in real-time
 
