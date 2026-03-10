@@ -34,5 +34,5 @@ Updates the model incrementally
 ---
 ### Acknowledgement
 
-#This project uses [River](https://riverml.xyz/) for online machine learning and streaming anomaly detection.  
-#River is an open-source Python library developed by Guillaume Lemaitre, Isabel Valera, and Romain Féraud.
+This project uses [River](https://riverml.xyz/) for online machine learning and streaming anomaly detection.  
+River is an open-source Python library developed by Guillaume Lemaitre, Isabel Valera, and Romain Féraud.
