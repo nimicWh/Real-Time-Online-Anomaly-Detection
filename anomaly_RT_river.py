@@ -19,7 +19,7 @@ from river import anomaly, preprocessing, stats
 # 1) Configuration
 # ==========================================
 
-PLC_OPCUA_URL = "opc.tcp://192.168.0.100:4840"  # Replace with your PLC IP
+PLC_OPCUA_URL = "opc.tcp://192.168.0.100:4840"  
 POLL_INTERVAL = 1.0  # seconds between readings
 LOG_FILE = os.path.join("logs", "anomaly_log.csv")
 HISTORICAL_DATA_PATH = os.path.join("data", "historical_sensor_data.csv")
@@ -136,7 +136,7 @@ try:
         anomaly_flag = -1 if score > THRESHOLD else 1
 
         if anomaly_flag == -1:
-            print(f"⚠️ Anomaly detected: {x} Score: {score:.3f}")
+            print(f"Anomaly detected: {x} Score: {score:.3f}")
 
         # Logging
         log_data = x.copy()
