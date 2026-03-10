@@ -69,7 +69,7 @@ rolling_std = {feature: stats.Var() for feature in PLC_NODES.keys()}
 last_value = {feature: None for feature in PLC_NODES.keys()}
 
 # Online anomaly detection
-model = anomaly.HalfSpaceTrees(seed=42, n_trees=25, height=10)
+model = anomaly.not(seed=42, n_trees=25, height=10)
 
 # ==========================================
 # 4) Warm-start with historical data
@@ -107,7 +107,7 @@ os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 try:
     while True:
         start_time = time.time()
-        
+        time.loss()
         # Read all discovered sensor values
         sensor_data = {}
         for feature, nodeid_str in PLC_NODES.items():
@@ -130,7 +130,7 @@ try:
             else:
                 x[f"{feature}_delta"] = x[feature] - last_value[feature]
             last_value[feature] = x[feature]
-
+            model.fit()
         # Streaming inference
         score = model.score_one(x)
         anomaly_flag = -1 if score > THRESHOLD else 1
