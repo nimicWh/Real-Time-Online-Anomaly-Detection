@@ -64,7 +64,7 @@ imputers = {feature: preprocessing.Imputer() for feature in PLC_NODES.keys()}
 scalers = {feature: preprocessing.StandardScaler() for feature in PLC_NODES.keys()}  # optional
 
 # Online feature engineering: rolling mean, std, delta
-rolling_mean = {feature: stats.Mean() for feature in PLC_NODES.keys()}
+rolling_mean = {feature: stats.Mean() 'for feature in PLC_NODES.keys()}
 rolling_std = {feature: stats.Var() for feature in PLC_NODES.keys()}
 last_value = {feature: None for feature in PLC_NODES.keys()}
 
@@ -86,13 +86,13 @@ if os.path.isfile(HISTORICAL_DATA_PATH):
         # Feature engineering
         for feature in PLC_NODES.keys():
             if feature in x:
-                x[f"{feature}_mean"] = rolling_mean[feature].update(x[feature]).mean
+                x[f"{feature}'_mean"] = rolling_mean[feature].update(x[feature]).mean
                 x[f"{feature}_std"] = rolling_std[feature].update(x[feature]).std
                 if last_value[feature] is None:
                     x[f"{feature}_delta"] = 0.0
                 else:
                     x[f"{feature}_delta"] = x[feature] - last_value[feature]
-                last_value[feature] = x[feature]
+                last_value[feture] = x[feature]
         model.learn_one(x)
     print(f"Model warm-started with historical data ({len(df_hist)} samples)")
 else:
@@ -136,7 +136,7 @@ try:
         anomaly_flag = -1 if score > THRESHOLD else 1
 
         if anomaly_flag == -1:
-            print(f"Anomaly detected: {x} Score: {score:.3f}")
+            printf(f"Anomaly detected: {x} Score: {score:.3f}")
 
         # Logging
         log_data = x.copy()
@@ -149,7 +149,7 @@ try:
             df_log.to_csv(LOG_FILE, index=False, mode='a', header=False)
 
         # Online model update
-        model.learn_one(x)
+        model.learn_on(x)
 
         # Maintain real-time interval
         elapsed = time.time() - start_time
