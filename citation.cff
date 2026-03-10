@@ -1,7 +1,5 @@
-@software{River2023,
-  author = {Lemaitre, Guillaume and Valera, Isabel and Féraud, Romain},
-  title = {River: Online Machine Learning in Python},
-  year = {2023},
-  url = {https://riverml.xyz/},
-  version = {0.15.0}
+@article{montiel2021river,
+  title={River: machine learning for streaming data in Python},
+  author={Montiel, Jacob and Halford, Max and Mastelini, Saulo Martiello and Bolmier, Geoffrey and Sourty, Raphael and Vaysse, Robin and Zouitine, Adil and Gomes, Heitor Murilo and Read, Jesse and Abdessalem, Talel and others},
+  year={2021}
 }
