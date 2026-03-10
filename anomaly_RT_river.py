@@ -131,7 +131,4 @@ except Exception as e:
 finally:
     client.disconnect()
     print("Disconnected from PLC")
-    # Save updated model
-    os.makedirs(os.path.dirname(RIVER_MODEL_PATH), exist_ok=True)
-    joblib.dump(model, RIVER_MODEL_PATH)
-    print(f"Online-updated model saved to {RIVER_MODEL_PATH}")
+ 
