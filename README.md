@@ -4,6 +4,14 @@ This project implements a **real-time streaming anomaly detection pipeline** usi
 
 This project uses for online machine learning (Lemaitre et al., 2023).
 
+Reads sensor values in real-time via OPC UA
+
+Computes online features and anomaly score
+
+Logs all data and anomalies to CSV
+
+Updates the model incrementally
+
 ---
 
 ## Features
