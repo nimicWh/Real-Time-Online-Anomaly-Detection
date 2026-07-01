@@ -19,39 +19,11 @@ from river import anomaly
 # 1) Configuration
 # ==========================================
 
-PLC_OPCUA_URL = "opc.tcp://192.168.0.100:4840"  
-POLL_INTERVAL = 1.0  # seconds between readings
-LOG_FILE = os.path.join("logs", "anomaly_log.csv")
-THRESHOLD = 0.6  # anomaly score threshold
 
 # ==========================================
 # 2) Connect to PLC and discover nodes
 # ==========================================
 
-client = Client(PLC_OPCUA_URL)
-client.connect()
-print(f"Connected to PLC at {PLC_OPCUA_URL}")
-
-# Get all namespaces
-namespaces = client.get_namespace_array()
-print("PLC Namespaces:")
-for i, uri in enumerate(namespaces):
-    print(f"ns={i} -> {uri}")
-
-# Auto-discover all sensor variables recursively
-PLC_NODES = {}
-
-def browse_variables(node):
-    if node.get_node_class() == ua.NodeClass.Variable:
-        PLC_NODES[node.get_browse_name().Name] = str(node.nodeid)
-    for child in node.get_children():
-        browse_variables(child)
-
-root = client.get_root_node()
-browse_variables(root)
-print("Discovered PLC sensor nodes:")
-for name, nodeid in PLC_NODES.items():
-    print(f"{name} -> {nodeid}")
 
 # ==========================================
 # 3) Initialize River online pipeline
